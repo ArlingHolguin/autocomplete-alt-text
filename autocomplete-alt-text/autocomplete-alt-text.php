@@ -25,58 +25,12 @@
  * Domain Path:       /languages
  */
 
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
+ function auto_image_alt($attachment_id) {
+	$mime_type = get_post_mime_type($attachment_id);
+	if(strpos($mime_type, 'image') !== false) {
+		$image_title = get_the_title($attachment_id);
+		update_post_meta($attachment_id, '_wp_attachment_image_alt', $image_title);
+	}
 }
 
-/**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
- */
-define( 'AUTOCOMPLETE_ALT_TEXT_VERSION', '1.0.0' );
-
-/**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-autocomplete-alt-text-activator.php
- */
-function activate_autocomplete_alt_text() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-autocomplete-alt-text-activator.php';
-	Autocomplete_Alt_Text_Activator::activate();
-}
-
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-autocomplete-alt-text-deactivator.php
- */
-function deactivate_autocomplete_alt_text() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-autocomplete-alt-text-deactivator.php';
-	Autocomplete_Alt_Text_Deactivator::deactivate();
-}
-
-register_activation_hook( __FILE__, 'activate_autocomplete_alt_text' );
-register_deactivation_hook( __FILE__, 'deactivate_autocomplete_alt_text' );
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'includes/class-autocomplete-alt-text.php';
-
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
-function run_autocomplete_alt_text() {
-
-	$plugin = new Autocomplete_Alt_Text();
-	$plugin->run();
-
-}
-run_autocomplete_alt_text();
+add_action('add_attachment', 'auto_image_alt');
