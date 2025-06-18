@@ -14,8 +14,8 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Autocomplete Alt Text
- * Plugin URI:        https://github.com/ArlingHolguin?tab=repositories
- * Description:       Al subir una imagen auto completa el texto alternativo de la imagen con el nombre que ñle hayas puesto a su imagen
+ * Plugin URI:        https://github.com/ArlingHolguin/autocomplete-alt-text
+ * Description:       Al subir una imagen auto completa el texto alternativo de la imagen con el nombre que le hayas puesto a su imagen
  * Version:           1.0.0
  * Author:            Arling Holguin
  * Author URI:        https://github.com/ArlingHolguin/
